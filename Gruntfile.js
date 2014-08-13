@@ -321,6 +321,18 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      kendo:{
+        expand: true,
+        cwd: '<%= yeoman.app %>/kendoui/styles/Bootstrap',
+        dest: 'dist/kendoui/styles/Bootstrap',
+        src: '**'
+      },
+      parse:{
+        expand: true,
+        cwd: 'dist/',
+        dest: 'parseapp/public/',
+        src: '**'
       }
     },
 
@@ -417,7 +429,9 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'copy:kendo',
+    'copy:parse'
   ]);
 
   grunt.registerTask('default', [

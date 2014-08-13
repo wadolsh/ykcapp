@@ -1,0 +1,73 @@
+<style type="text/css">
+  .labels {
+    color: red;
+    background-color: white;
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    width: 110px;     
+    border: 2px solid black;
+    white-space: nowrap;
+  }
+  .affix {
+    top: 50px;
+    left: 253px;
+    width: calc(100% - 253px);
+  }
+</style>
+<div class="header hidden-print" id="header">
+  <h2 class="text-muted">区域管理ツール1</h2>
+</div>
+
+<div id="pagerNav" style="z-index:100" class="hidden-print">
+  <div class="">
+    <div class=""><input type="text" ng-model="pageSize" class="form-control"></div>
+    <div class="">
+      <div id="pager" kendo-pager k-data-source="source" k-options="pagerOption"></div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div ng-repeat="pageDatas in pages">
+  <div class="tablePage" style="page-break-after: always;">
+    <div class="header">
+      <h3>{{pageDatas[0]['区分名'] + ' / ' + pageDatas[0]['地域名'] + ' / ' + pageDatas[0]['カード番号']}}</h3>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>住所1</th>
+          <th>住所2</th>
+          <th>住所3</th>
+          <th>緯度 / 経度</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr ng-repeat="dataItem in pageDatas">
+            <th>{{ dataItem["ID"] }}</th>
+            <td>{{ dataItem["都県名"] + dataItem["市区名"] + dataItem["町名"] }}</td>
+            <td>{{ [dataItem["丁目"], dataItem["番地"], dataItem["号"]].join("-") }}</td>
+            <td>{{ dataItem["住所詳細"] }}</td>
+            <td>{{ dataItem["緯度"] }} / {{ dataItem["経度"] }}</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="map{{$index}}" ng-init="createMap('map' + $index, pageDatas)" style="height:800px; page-break-after: always;"></div>
+  <br/>
+</div>
+<script type="text/javascript">
+  $('#pagerNav').affix({
+    offset: {
+      top: 120,
+      bottom: 140
+    //, bottom: function () {
+    //    return (this.bottom = $('.footer').outerHeight(true))
+    //  }
+    },
+    target: $('#header')
+  });
+</script>

@@ -1,0 +1,27 @@
+<!doctype html><!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><title></title><meta name="description" content=""><meta name="viewport" content="width=device-width"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="shortcut icon" href="favicon.ico"><!-- Place favicon.ico and apple-touch-icon.png in the root directory --><link rel="stylesheet" href="styles/3b594240.vendor.css"><link rel="stylesheet" href="styles/0bcfb81e.main.css"><body ng-app="ykcApp"><!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]--><!-- Add your site or application content here --><div class="navbar navbar-inverse navbar-fixed-top" role="navigation"><div class="container-fluid"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="#">Ykc App</a></div><div class="navbar-collapse collapse"><ul class="nav navbar-nav navbar-right"><li><a href="#">Settings</a></li><li><a href="#">Profile</a></li><li><a href="#">Help</a></li></ul><form class="navbar-form navbar-right"><input type="text" class="form-control" placeholder="Search..."></form></div></div></div><div class="container-fluid" ng-controller="SidemenuCtrl"><div class="row"><div class="col-sm-3 col-md-2 sidebar"><ul kendo-panel-bar="" k-options="panelBarOptions" class="nav nav-sidebar"><li ng-class="{active:activeMenu==item.key}" ng-repeat="item in Bridge.setting.strutsModels.oprs.strutsSet.menu"><a href="#/{{item.key}}" ng-click="$parent.activeMenu=item.key;">{{item.label}}</a><ul><li ng-repeat="(key, sub) in item.sub"><span class="k-link"><a href="#/{{key}}">{{sub.label}}</a></span></li></ul></li><!--
+            <li ng-class="{active:mainActive}"><a href="#/" ng-click="mainActive=true;tmsActive=false;smpActive=false;">Main</a></li>
+            <li ng-class="{active:tmsActive}"><a href="#/tms" ng-click="mainActive=false;tmsActive=true;smpActive=false;">TMS</a></li>
+            <li ng-class="{active:smpActive}"><a href="#/smp" ng-click="mainActive=false;tmsActive=false;smpActive=true;">SMP</a></li>
+            --></ul></div><div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view=""></div></div></div><!-- Google Analytics: change UA-XXXXX-X to be your site's ID --><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');</script><!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]--><script src="scripts/d9ab910e.vendor.js"></script><script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyDejNEedWnONLDewIynvzf6Wv-aI4sd3eU&amp;sensor=true"></script><script src="scripts/becfa5ce.scripts.js"></script><script type="text/javascript">function resizeContainers() {
+            var headerHeight = $("#header").height(),
+                searchWrapper = $("#example-search-wrapper").height(),
+                navbarWrapper = $("#example-nav-bar").height(),
+                htmlHeight = (kendo.support.mobileOS) ? parseFloat(window.innerHeight) : $('html').height();
+            navHeight = htmlHeight - (headerHeight + searchWrapper + navbarWrapper);
+            $("#nav-wrapper").height(navHeight - 2);
+            $("#main").height(navHeight + searchWrapper + navbarWrapper);
+        }
+
+        $(document).ready(resizeContainers);
+        $(window).resize(resizeContainers);</script>

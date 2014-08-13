@@ -1,0 +1,6 @@
+<div class="list" ng-form="formObj">
+  <bridge-input ng-attr-struts-model="{{strutsModelKey}}" ng-attr-column="{{struts.key}}" ng-repeat="struts in strutsSet"></bridge-input>
+  <div class="padding">
+    <button class="button button-block button-default" ng-disabled="formObj.$invalid" ng-click="regist(model, formObj)">登録</button>
+  </div>
+</div>

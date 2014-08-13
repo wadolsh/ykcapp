@@ -1,0 +1,37 @@
+<label class="item item-input"
+        ng-class="{'sub-input' : !struts.label, 'item-divider': struts.input.tag=='label', 'item-select': struts.input.tag=='select'}"
+        ng-show="{{struts.input.type != 'hidden'}}">
+  <div class="input-label" ng-if="struts.label">
+    <label>{{struts.label}}</label>
+  </div>
+
+  <strong ng-if="struts.input.tag=='label'">{{modelColumn[keyName]}}</strong>
+
+  <input dynamic-input type="{{struts.input.type || 'text'}}" ng-if="!struts.input.tag" ng-model="modelColumn[keyName]" placeholder="{{struts.placeholder}}">
+  <input dynamic-input type="file" ng-if="struts.input.tag=='image'" accept="image/*" ng-model="modelColumn[keyName]" placeholder="{{struts.placeholder}}">
+
+  <div  ng-if="(struts.input.tag=='output')">
+    <output dynamic-input ng-model="modelColumn[keyName]" ng-if="(struts.input.tag=='output')">{{modelColumn[keyName]}}</output>
+  </div>
+  <div  ng-if="(struts.input.tag=='select')">
+    <select dynamic-input ng-model="modelColumn[keyName]" ng-options="option.value as option.label for option in struts.input.options" ng-if="(struts.input.tag=='select')"></select>
+  </div>
+
+  <div class="range" ng-if="struts.input.tag == 'range'">
+    <i class="icon {{struts.input.icon.start}}"></i>
+    <input dynamic-input type="range" min="{{struts.input.options[0].value}}" max="{{struts.input.options[struts.input.options.length-1].value}}" list="{{keyName}}" ng-model="modelColumn[keyName]" >
+    <datalist id="{{keyName}}">
+      <option value="{{option.value}}" ng-repeat="option in struts.input.options" class="button">
+    </datalist>
+    <i class="icon {{struts.input.icon.end}}"></i>
+    <label class="label-range">{{modelColumn[keyName]}}</label>
+  </div>
+
+  <div class="button-bar bar-stable radio" ng-if="struts.input.tag == 'radio'">
+    <label for="{{keyName + $index}}"  class="button" ng-class="{'button-balanced': (modelColumn[keyName] == option.value)}"  ng-repeat="option in struts.input.options">
+      {{option.label}}
+      <input type="radio" dynamic-input ng-model="modelColumn[keyName]" id="{{keyName + $index}}" value="{{option.value}}" ng-hide="true"/>
+    </label>
+  </div>
+  <span class="input-helper" ng-hide="formObj[struts.key].$valid || struts.input.tag=='label'">{{validate.message(formObj[struts.key].$error, struts)}}</span>
+</label>

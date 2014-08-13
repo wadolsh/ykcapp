@@ -1,0 +1,6 @@
+<div class="list list-inset" ng-form="formObj">
+  <ng-include src="'templates/ionic/bridge-input.html'" ng-repeat="struts in strutsSet" onload="keyName=struts.key"></ng-include>
+  <div class="button-outer">
+    <p><button class="button button-block button-default" ng-disabled="formObj.$invalid" ng-click="regist(model, formObj)">登録する</button></p>
+  </div>
+</div>

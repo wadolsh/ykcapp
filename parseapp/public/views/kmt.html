@@ -1,0 +1,17 @@
+<style type="text/css">.labels {
+    color: red;
+    background-color: white;
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    width: 110px;     
+    border: 2px solid black;
+    white-space: nowrap;
+  }</style><div class="header"><h2 class="text-muted">区域管理ツール</h2></div><div class="well"><div id="map_canvas" style="widht:100%;height:400px"></div></div><div class="well"><table class="table table-bordered"><thead><tr><th colspan="5"><select ng-model="areaSelect1" ng-options="key as key for (key, value) in areaOption1"></select><select ng-model="areaSelect2" ng-options="key as key for (key, value) in areaOption2"></select><select ng-model="areaSelect3" ng-options="value as value for (key, value) in areaOption3"></select><tr><th>ID<th>住所1<th>住所2<th>住所3<th>緯度 / 経度<tbody kendo-listview="" id="listView" k-data-source="source" k-template="listViewTemplate"></table><div kendo-pager="" k-data-source="source" k-options="pagerOption"></div></div><script type="text/x-kendo-angular-template" id="template"><tr>
+      <td>{{ dataItem["ID"] }}</td>
+      <td>{{ dataItem["都県名"] + dataItem["市区名"] + dataItem["町名"] }}</td>
+      <td>{{ [dataItem["丁目"], dataItem["番地"], dataItem["号"]].join("-") }}</td>
+      <td>{{ dataItem["住所詳細"] }}</td>
+      <td>{{ dataItem["緯度"] }} / {{ dataItem["経度"] }}</td>
+  </tr></script><div class="well"><form role="form"><div class="form-group"><label for="exampleInputEmail1">CSVデータ</label><textarea class="form-control" rows="10" ng-model="csvText"></textarea></div><button type="submit" class="btn btn-default" ng-click="csvToJson(csvText)">変換</button></form></div>

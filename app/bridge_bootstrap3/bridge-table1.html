@@ -1,0 +1,12 @@
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th ng-repeat="item in table">{{item.label}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="data in datas">
+      <td ng-repeat="item in table" br-html="{{data[item.key]|modelParser:item:data:this}}"></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,21 @@
+<label class="item item-input"
+        ng-class="{'sub-input' : !struts.label, 'item-divider': struts.input.tag=='label', 'item-select': struts.input.tag=='select'}"
+        ng-show="{{struts.input.type != 'hidden'}}">
+  <div class="input-label" ng-if="struts.label">
+    <label class="label-default">{{struts.label}}</label>
+  </div>
+
+  <strong ng-if="struts.input.tag=='label'">{{modelColumn[keyName]}}</strong>
+
+  <input dynamic-input type="{{struts.input.type || 'text'}}" ng-if="!struts.input.tag" ng-model="modelColumn[keyName]" placeholder="{{struts.placeholder}}">
+  <input dynamic-input type="file" ng-if="struts.input.tag=='image'" accept="image/*" ng-model="modelColumn[keyName]" placeholder="{{struts.placeholder}}">
+
+  <div  ng-if="(struts.input.tag=='output')">
+    <output dynamic-input ng-model="modelColumn[keyName]" ng-if="(struts.input.tag=='output')">{{modelColumn[keyName]}}</output>
+  </div>
+  <div  ng-if="(struts.input.tag=='select')">
+    <select dynamic-input ng-model="modelColumn[keyName]" ng-options="option.value as option.label for option in struts.input.options" ng-if="(struts.input.tag=='select')"></select>
+  </div>
+
+  <span class="input-helper" ng-hide="formObj[struts.key].$valid || struts.input.tag=='label'">{{validate.message(formObj[struts.key].$error, struts)}}</span>
+</label>

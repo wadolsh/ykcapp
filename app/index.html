@@ -8,9 +8,13 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="shortcut icon" href="favicon.ico">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
+    <link rel="stylesheet" href="kendoui/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="kendoui/styles/kendo.bootstrap.min.css">
     <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
@@ -18,6 +22,7 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/dashboard.css">
     <!-- endbuild -->
+    
   </head>
   <body ng-app="ykcApp">
     <!--[if lt IE 7]>
@@ -26,63 +31,58 @@
 
     <!-- Add your site or application content here -->
 
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Project name</a>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Ykc App</a>
+        </div>
+        
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
     </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#">Settings</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Help</a></li>
-      </ul>
-      <form class="navbar-form navbar-right">
-        <input type="text" class="form-control" placeholder="Search...">
-      </form>
+    
+    <div class="container-fluid" ng-controller="SidemenuCtrl">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+        
+        
+          <ul kendo-panel-bar k-options="panelBarOptions" class="nav nav-sidebar">
+            <li ng-class="{active:activeMenu==item.key}" ng-repeat="item in Bridge.setting.strutsModels.oprs.strutsSet.menu">
+              <a href="#/{{item.key}}" ng-click="$parent.activeMenu=item.key;">{{item.label}}</a>
+              <ul>
+                <li ng-repeat="(key, sub) in item.sub">
+                  <span class="k-link"><a href="#/{{key}}">{{sub.label}}</a></span>
+                </li>
+              </ul>
+            </li>
+
+
+            <!--
+            <li ng-class="{active:mainActive}"><a href="#/" ng-click="mainActive=true;tmsActive=false;smpActive=false;">Main</a></li>
+            <li ng-class="{active:tmsActive}"><a href="#/tms" ng-click="mainActive=false;tmsActive=true;smpActive=false;">TMS</a></li>
+            <li ng-class="{active:smpActive}"><a href="#/smp" ng-click="mainActive=false;tmsActive=false;smpActive=true;">SMP</a></li>
+            -->
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view="">
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar">
-        <li class="active"><a href="#">Overview</a></li>
-        <li><a href="#">Reports</a></li>
-        <li><a href="#">Analytics</a></li>
-        <li><a href="#">Export</a></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li><a href="#/tms">TMS</a></li>
-        <li><a href="">Nav item again</a></li>
-        <li><a href="">One more nav</a></li>
-        <li><a href="">Another nav item</a></li>
-        <li><a href="">More navigation</a></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li><a href="">Nav item again</a></li>
-        <li><a href="">One more nav</a></li>
-        <li><a href="">Another nav item</a></li>
-      </ul>
-    </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view="">
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -112,10 +112,47 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+    
+    
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyDejNEedWnONLDewIynvzf6Wv-aI4sd3eU&amp;sensor=true"></script>
+    
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js"></script>
+    <script src="kendoui/js/kendo.core.min.js"></script>
+    <script src="kendoui/js/kendo.data.min.js"></script>
+    <script src="kendoui/js/kendo.listview.min.js"></script>
+    <script src="kendoui/js/kendo.pager.min.js"></script>
+    <script src="kendoui/js/kendo.panelbar.min.js"></script>
+    <script src="kendoui/js/kendo.angular.min.js"></script>
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <!-- endbuild -->
+    <script src="scripts/parse-1.2.18.min.js"></script>
+    <script src="scripts/bridge.core.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/bridge.angular-directives.js"></script>
+    <script src="scripts/bridge.angular-filter.js"></script>
+    <script src="scripts/bridge.angular-parse.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+
+    <script type="text/javascript" src="scripts/qrcode.min.js"></script>
+    <script type="text/javascript" src="scripts/markerwithlabel_packed.js"></script>
+    <!-- endbuild -->
+    
+    <script type="text/javascript">
+        function resizeContainers() {
+            var headerHeight = $("#header").height(),
+                searchWrapper = $("#example-search-wrapper").height(),
+                navbarWrapper = $("#example-nav-bar").height(),
+                htmlHeight = (kendo.support.mobileOS) ? parseFloat(window.innerHeight) : $('html').height();
+            navHeight = htmlHeight - (headerHeight + searchWrapper + navbarWrapper);
+            $("#nav-wrapper").height(navHeight - 2);
+            $("#main").height(navHeight + searchWrapper + navbarWrapper);
+        }
+
+        $(document).ready(resizeContainers);
+        $(window).resize(resizeContainers);
+      
+    </script>  
+  
+  
 </body>
 </html>
